@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">M5.lesson1.1</string>
+    <string name="btn_menu_skip">skip</string>
+    <string name="nextButton">next</string>
+    <string name="finishButton">finish</string>
+</resources>
