@@ -19,6 +19,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager.widget.ViewPager;
 
 import com.dastan.m5lesson11.R;
+import com.dastan.m5lesson11.data.SampleData;
 import com.dastan.m5lesson11.ui.main.MainActivity;
 
 public class OnBoardActivity extends AppCompatActivity {

@@ -2,6 +2,8 @@ package com.dastan.m5lesson11.data;
 
 import com.dastan.m5lesson11.R;
 
+import java.util.ArrayList;
+
 public class SampleData {
     String title;
     int img;
@@ -22,7 +24,7 @@ public class SampleData {
         this.img = img;
     }
 
-    public int[] sliderImages = {
+    public int [] sliderImages = {
             R.drawable.cris1,
             R.drawable.cris2,
             R.drawable.cris3

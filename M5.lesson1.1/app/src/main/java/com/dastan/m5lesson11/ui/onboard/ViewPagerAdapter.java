@@ -15,11 +15,13 @@ import androidx.viewpager.widget.PagerAdapter;
 import com.dastan.m5lesson11.R;
 import com.dastan.m5lesson11.data.SampleData;
 
+import java.util.ArrayList;
+
 public class ViewPagerAdapter extends PagerAdapter {
 
     Context context;
     LayoutInflater layoutInflater;
-    private SampleData sampleData;
+    SampleData sampleData;
 
     public ViewPagerAdapter(Context context) {
         this.context = context;
@@ -28,7 +30,7 @@ public class ViewPagerAdapter extends PagerAdapter {
 
     @Override
     public int getCount() {
-        return sampleData.sliderHeadings.length;
+        return sampleData.getTitle().length();
     }
 
     @Override
@@ -45,8 +47,8 @@ public class ViewPagerAdapter extends PagerAdapter {
         ImageView slideImageView = view.findViewById(R.id.onBoardImageView);
         TextView slideTextView = view.findViewById(R.id.textView);
 
-        slideImageView.setImageResource(sampleData.sliderImages[position]);
-        slideTextView.setText(sampleData.sliderHeadings[position]);
+        slideImageView.setImageResource(sampleData.getImg());
+        slideTextView.setText(sampleData.getTitle());
 
         container.addView(view);
         return view;

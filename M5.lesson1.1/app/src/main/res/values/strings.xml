@@ -3,4 +3,9 @@
     <string name="btn_menu_skip">skip</string>
     <string name="nextButton">next</string>
     <string name="finishButton">finish</string>
+    <string name="weather_key">4d63c1acf9a085448b23971128e5eddd</string>
+    <string name="day">14</string>
+    <string name="month">December</string>
+    <string name="year">2019</string>
+    <string name="city_name">Bishkek, KGZ</string>
 </resources>

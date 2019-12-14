@@ -5,6 +5,7 @@
     <color name="colorAccent">#D81B60</color>
     <color name="colorGreen">#ff669900</color>
     <color name="colorTabLayout">#69B7EE</color>
-    <color name="colorGray">#747D85</color>
+    <color name="colorGray">#575A5F</color>
     <color name="colorWhite">#FFFFFF</color>
+    <color name="colorBlack">#000000</color>
 </resources>
