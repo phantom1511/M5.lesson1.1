@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="padding_16">16sp</dimen>
+    <dimen name="padding_32">32sp</dimen>
+    <dimen name="day_size">50sp</dimen>
+    <dimen name="month_year_size">15sp</dimen>
+    <dimen name="size_100">70sp</dimen>
+    <dimen name="padding_64">64sp</dimen>
+</resources>
