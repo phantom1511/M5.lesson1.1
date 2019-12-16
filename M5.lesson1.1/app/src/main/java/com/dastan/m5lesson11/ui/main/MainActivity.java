@@ -12,9 +12,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.bumptech.glide.Glide;
 import com.dastan.m5lesson11.R;
 import com.dastan.m5lesson11.data.RetrofitBuilder;
+import com.dastan.m5lesson11.data.SampleData;
 import com.dastan.m5lesson11.data.entity.CurrentWeather;
 import com.dastan.m5lesson11.data.entity.Main;
 import com.dastan.m5lesson11.data.entity.Wind;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -23,7 +27,7 @@ import retrofit2.Response;
 public class MainActivity extends AppCompatActivity {
 
     private TextView tempCity, humidity, pressure, tempMax,
-            tempMin, nameCity, wind, clouds, day, month, year, sunrise, sunset;
+            tempMin, nameCity, wind, clouds, day, month, year, sunrise, sunset, status;
     private ImageView imageView;
 
 
@@ -51,10 +55,11 @@ public class MainActivity extends AppCompatActivity {
         imageView = findViewById(R.id.weatherImg);
         clouds = findViewById(R.id.cloudView);
         day = findViewById(R.id.day);
-        month = findViewById(R.id.month);
-        year = findViewById(R.id.year);
+//        month = findViewById(R.id.month);
+//        year = findViewById(R.id.year);
         sunrise = findViewById(R.id.sunriseView);
         sunset = findViewById(R.id.sunsetView);
+        status = findViewById(R.id.statusView);
     }
 
     private void fetchWeather() {
@@ -64,22 +69,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<CurrentWeather> call, Response<CurrentWeather> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    tempCity.setText(response.body().getMain().getTemp().toString() + " °C");
-                    tempMax.setText(response.body().getMain().getTempMax().toString() + " °C");
-                    tempMin.setText(response.body().getMain().getTempMin().toString() + " °C");
-                    humidity.setText(response.body().getMain().getHumidity().toString() + "%");
-                    pressure.setText(response.body().getMain().getPressure().toString() + "mb");
-                    clouds.setText(response.body().getClouds().getAll().toString() + "%");
-                    wind.setText(response.body().getWind().getSpeed().toString() + "m/s");
-                    nameCity.setText(response.body().getName() + " " + response.body().getSys().getCountry());
-//                    sunrise.setText(response.body().getSys().getSunrise().toString());
-//                    sunset.setText(response.body().getSys().getSunset().toString());
-//                    day.setText(response.raw().headers().getDate("Date").toString());
-                    Glide.with(getApplicationContext())
-                            .load("http://openweathermap.org/img/wn/"
-                            + response.body().getWeather().get(0).getIcon() + "@2x.png")
-                            .into(imageView);
-                    Toast.makeText(getApplicationContext(), "Temperature now", Toast.LENGTH_SHORT).show();
+                    setResponse(response);
                 }
             }
 
@@ -88,5 +78,25 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    public void setResponse(Response<CurrentWeather> response){
+        tempCity.setText(response.body().getMain().getTemp().toString() + " °C");
+        tempMax.setText(response.body().getMain().getTempMax().toString() + " °C");
+        tempMin.setText(response.body().getMain().getTempMin().toString() + " °C");
+        humidity.setText(response.body().getMain().getHumidity().toString() + "%");
+        pressure.setText(response.body().getMain().getPressure().toString() + "mb");
+        clouds.setText(response.body().getClouds().getAll().toString() + "%");
+        wind.setText(response.body().getWind().getSpeed().toString() + "m/s");
+        nameCity.setText(response.body().getName() + " " + response.body().getSys().getCountry());
+//                    sunrise.setText(response.body().getSys().getSunrise().toString());
+//                    sunset.setText(response.body().getSys().getSunset().toString());
+        day.setText(new SimpleDateFormat("dd MMMM yyyy").format(new Date()));
+        status.setText(response.body().getWeather().get(0).getDescription());
+        Glide.with(getApplicationContext())
+                .load("http://openweathermap.org/img/wn/"
+                        + response.body().getWeather().get(0).getIcon() + "@2x.png")
+                .into(imageView);
+        Toast.makeText(getApplicationContext(), "Temperature now", Toast.LENGTH_SHORT).show();
     }
 }
