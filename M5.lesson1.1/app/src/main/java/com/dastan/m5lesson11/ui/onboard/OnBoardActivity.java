@@ -22,12 +22,13 @@ import com.dastan.m5lesson11.R;
 import com.dastan.m5lesson11.data.SampleData;
 import com.dastan.m5lesson11.ui.main.MainActivity;
 
+import java.util.ArrayList;
+
 public class OnBoardActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
     private ViewPager viewPager;
     private LinearLayout linearLayout;
-    private ViewPagerAdapter viewPagerAdapter;
     private TextView[] dots;
     private Button nextBtn;
     private Button finishBtn;
@@ -39,7 +40,14 @@ public class OnBoardActivity extends AppCompatActivity {
         setContentView(R.layout.activity_on_board);
         initViews();
         initListeners();
+        initViewPager();
         addDotsIndicator(0);
+    }
+
+    private void initViewPager() {
+        ViewPagerAdapter  viewPagerAdapter = new ViewPagerAdapter();
+        viewPager.setAdapter(viewPagerAdapter);
+        viewPagerAdapter.update(getData());
     }
 
     public void addDotsIndicator(int position){
@@ -65,8 +73,7 @@ public class OnBoardActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         viewPager = findViewById(R.id.viewPager);
         linearLayout = findViewById(R.id.dotLayout);
-        viewPagerAdapter = new ViewPagerAdapter(this);
-        viewPager.setAdapter(viewPagerAdapter);
+
         nextBtn = findViewById(R.id.btnNext);
         finishBtn = findViewById(R.id.btnFinish);
     }
@@ -150,4 +157,14 @@ public class OnBoardActivity extends AppCompatActivity {
 
         }
     };
+
+    private ArrayList<SampleData> getData(){
+        ArrayList<SampleData> list = new ArrayList<>();
+
+        list.add(new SampleData("Cristiano Ronaldo",R.drawable.cris1 ));
+        list.add(new SampleData("Dos Santos",R.drawable.cris2 ));
+        list.add(new SampleData("Aveiro",R.drawable.cris3 ));
+
+        return list;
+    }
 }

@@ -21,16 +21,21 @@ public class ViewPagerAdapter extends PagerAdapter {
 
     Context context;
     LayoutInflater layoutInflater;
-    SampleData sampleData;
+    private ArrayList<SampleData> sampleData = new ArrayList<>();
 
-    public ViewPagerAdapter(Context context) {
-        this.context = context;
+    public ViewPagerAdapter() {
+
+    }
+
+    public void update(ArrayList<SampleData> sampleData){
+        this.sampleData = sampleData;
+        notifyDataSetChanged();
     }
 
 
     @Override
     public int getCount() {
-        return sampleData.getTitle().length();
+        return sampleData.size();
     }
 
     @Override
@@ -41,14 +46,17 @@ public class ViewPagerAdapter extends PagerAdapter {
     @NonNull
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
+        context = container.getContext();
         layoutInflater = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
         View view = layoutInflater.inflate(R.layout.slider_layout, container, false);
 
         ImageView slideImageView = view.findViewById(R.id.onBoardImageView);
         TextView slideTextView = view.findViewById(R.id.textView);
 
-        slideImageView.setImageResource(sampleData.getImg());
-        slideTextView.setText(sampleData.getTitle());
+
+        SampleData data = sampleData.get(position);
+        slideImageView.setImageResource(data.getImg());
+        slideTextView.setText(data.getTitle());
 
         container.addView(view);
         return view;

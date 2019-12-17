@@ -8,6 +8,11 @@ public class SampleData {
     String title;
     int img;
 
+    public SampleData(String title, int img) {
+        this.title = title;
+        this.img = img;
+    }
+
     public String getTitle() {
         return title;
     }
@@ -24,16 +29,6 @@ public class SampleData {
         this.img = img;
     }
 
-    public int [] sliderImages = {
-            R.drawable.cris1,
-            R.drawable.cris2,
-            R.drawable.cris3
-    };
 
-    public String[] sliderHeadings = {
-            "Cristiano Ronaldo",
-            "Dos Santos",
-            "Aveiro"
-    };
 }
 

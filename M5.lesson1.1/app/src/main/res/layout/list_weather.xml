@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/padding_16">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/weekWeatherIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/snow"/>
+
+    <TextView
+        android:id="@+id/weekDayText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="17"
+        android:textSize="@dimen/weekText"
+        android:textColor="@color/colorBlack"
+        android:paddingBottom="@dimen/padding_16"
+        android:layout_gravity="center"/>
+
+    <TextView
+        android:id="@+id/weekTempMaxText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="30°"
+        android:textSize="@dimen/weekText"
+        android:textColor="@color/colorGray"
+        android:layout_gravity="center"/>
+
+    <TextView
+        android:id="@+id/weekTempMinText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="30°"
+        android:textSize="@dimen/weekText"
+        android:textColor="@color/colorGray"
+        android:layout_gravity="center"/>
+
+    </LinearLayout>
+
+</LinearLayout>

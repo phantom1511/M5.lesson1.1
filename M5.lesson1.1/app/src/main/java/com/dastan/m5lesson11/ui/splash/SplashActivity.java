@@ -21,7 +21,7 @@ public class SplashActivity extends AppCompatActivity {
             public void run() {
                 selectActivity();
             }
-        }, 2_000);
+        }, 1_000);
 
     }
 

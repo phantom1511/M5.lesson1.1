@@ -6,4 +6,5 @@
     <dimen name="month_year_size">15sp</dimen>
     <dimen name="size_100">70sp</dimen>
     <dimen name="padding_64">64sp</dimen>
+    <dimen name="weekText">20sp</dimen>
 </resources>
