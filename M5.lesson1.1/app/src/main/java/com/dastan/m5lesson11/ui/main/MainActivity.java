@@ -3,13 +3,9 @@ package com.dastan.m5lesson11.ui.main;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -17,17 +13,14 @@ import com.bumptech.glide.Glide;
 import com.dastan.m5lesson11.R;
 import com.dastan.m5lesson11.base.BaseActivity;
 import com.dastan.m5lesson11.data.RetrofitBuilder;
-import com.dastan.m5lesson11.data.SampleData;
 import com.dastan.m5lesson11.data.entity.CurrentWeather;
 import com.dastan.m5lesson11.data.entity.ForecastEntity;
 import com.dastan.m5lesson11.data.entity.Main;
-import com.dastan.m5lesson11.data.entity.Wind;
 import com.dastan.m5lesson11.ui.adapter.WeatherWeekAdapter;
-
-import org.json.JSONArray;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.Locale;
 
@@ -40,19 +33,32 @@ import static com.dastan.m5lesson11.BuildConfig.API_KEY;
 
 public class MainActivity extends BaseActivity {
 
-    @BindView(R.id.cityTemp) TextView tempCity;
-    @BindView(R.id.humidityView) TextView humidity;
-    @BindView(R.id.pressureView) TextView pressure;
-    @BindView(R.id.maxTemp) TextView tempMax;
-    @BindView(R.id.minTemp) TextView tempMin;
-    @BindView(R.id.cityName) TextView nameCity;
-    @BindView(R.id.windView) TextView wind;
-    @BindView(R.id.weatherImg) ImageView imageView;
-    @BindView(R.id.cloudView) TextView clouds;
-    @BindView(R.id.day) TextView day;
-    @BindView(R.id.sunriseView) TextView sunrise;
-    @BindView(R.id.sunsetView) TextView sunset;
-    @BindView(R.id.statusView)TextView status;
+    @BindView(R.id.cityTemp)
+    TextView tempCity;
+    @BindView(R.id.humidityView)
+    TextView humidity;
+    @BindView(R.id.pressureView)
+    TextView pressure;
+    @BindView(R.id.maxTemp)
+    TextView tempMax;
+    @BindView(R.id.minTemp)
+    TextView tempMin;
+    @BindView(R.id.cityName)
+    TextView nameCity;
+    @BindView(R.id.windView)
+    TextView wind;
+    @BindView(R.id.weatherImg)
+    ImageView imageView;
+    @BindView(R.id.cloudView)
+    TextView clouds;
+    @BindView(R.id.day)
+    TextView day;
+    @BindView(R.id.sunriseView)
+    TextView sunrise;
+    @BindView(R.id.sunsetView)
+    TextView sunset;
+    @BindView(R.id.statusView)
+    TextView status;
 
     @BindView(R.id.weekWeatherIcon)
     ImageView weatherWeekIcon;
@@ -63,8 +69,9 @@ public class MainActivity extends BaseActivity {
     @BindView(R.id.weekTempMinText)
     TextView minTempWeek;
 
-    @BindView(R.id.weekRecyclerView) RecyclerView recyclerViewWeek;
-    ArrayList<ForecastEntity> weekData;
+    @BindView(R.id.weekRecyclerView)
+    RecyclerView recyclerViewWeek;
+    ForecastEntity weekData;
     WeatherWeekAdapter weekAdapter;
 
 
@@ -79,12 +86,15 @@ public class MainActivity extends BaseActivity {
         setContentView(R.layout.activity_main);
 
         fetchWeather();
+        fetchForecastWeather();
+        initViews();
+    }
 
+    private void initViews(){
         recyclerViewWeek.setHasFixedSize(true);
         recyclerViewWeek.setLayoutManager(new LinearLayoutManager(this));
 
-        weekData = new ArrayList<>();
-
+        weekData = new ForecastEntity(weatherWeekIcon, dayWeekText, maxTempWeek, minTempWeek);
     }
 
     public static void start(Context context) {
@@ -99,8 +109,6 @@ public class MainActivity extends BaseActivity {
             public void onResponse(Call<CurrentWeather> call, Response<CurrentWeather> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     setResponse(response);
-                    weekAdapter = new WeatherWeekAdapter(MainActivity.this, weekData);
-                    recyclerViewWeek.setAdapter(weekAdapter);
                 }
             }
 
@@ -111,14 +119,30 @@ public class MainActivity extends BaseActivity {
         });
     }
 
-    private String parseDateToTime(double d){
+    private void fetchForecastWeather() {
+        RetrofitBuilder.getWeatherService().forecastWeather("Bishkek", API_KEY, "metric")
+                .enqueue(new Callback<ForecastEntity>() {
+                    @Override
+                    public void onResponse(Call<ForecastEntity> call, Response<ForecastEntity> response) {
+                        weekAdapter = new WeatherWeekAdapter(MainActivity.this, weekData);
+                        recyclerViewWeek.setAdapter(weekAdapter);
+                    }
+
+                    @Override
+                    public void onFailure(Call<ForecastEntity> call, Throwable t) {
+                        toast(t.getLocalizedMessage());
+                    }
+                });
+    }
+
+    private String parseDateToTime(double d) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm", Locale.getDefault());
         Date date = new Date();
         date.setTime((long) d * 1000);
         return dateFormat.format(date.getTime());
     }
 
-    public void setResponse(Response<CurrentWeather> response){
+    public void setResponse(Response<CurrentWeather> response) {
         tempCity.setText(response.body().getMain().getTemp().toString() + " °C");
         tempMax.setText(response.body().getMain().getTempMax().toString() + " °C");
         tempMin.setText(response.body().getMain().getTempMin().toString() + " °C");
@@ -146,6 +170,6 @@ public class MainActivity extends BaseActivity {
                 .into(imageView);
         toast("Temperature now");
 
-        weekData.add(new ForecastEntity(weatherWeekIcon, dayWeekText, maxTempWeek, minTempWeek));
+        weekData.getList().add(new CurrentWeather());
     }
 }

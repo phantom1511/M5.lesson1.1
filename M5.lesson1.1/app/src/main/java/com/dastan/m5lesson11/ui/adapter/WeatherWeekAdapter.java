@@ -27,9 +27,9 @@ import butterknife.BindView;
 public class WeatherWeekAdapter extends RecyclerView.Adapter<WeatherWeekAdapter.WeekViewHolder> {
 
     private Context mContext;
-    private ArrayList<ForecastEntity> weekData;
+    private ForecastEntity weekData;
 
-    public WeatherWeekAdapter(Context context, ArrayList<ForecastEntity> forecastEntityArrayList) {
+    public WeatherWeekAdapter(Context context, ForecastEntity forecastEntityArrayList) {
         mContext = context;
         weekData = forecastEntityArrayList;
 
@@ -45,26 +45,12 @@ public class WeatherWeekAdapter extends RecyclerView.Adapter<WeatherWeekAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull WeekViewHolder holder, int position) {
-        ForecastEntity forecastEntity = weekData.get(position);
-
-        String imgUrl = forecastEntity.getWeekWeatherIcon();
-        String day = forecastEntity.getWeekDay();
-        String maxTemp = forecastEntity.getMaxTemp();
-        String minTemp = forecastEntity.getMinTemp();
-
-        holder.dayWeekText.setText(day);
-        holder.maxTempWeek.setText(maxTemp);
-        holder.minTempWeek.setText(minTemp);
-        Glide.with(mContext)
-                .load("http://openweathermap.org/img/wn/"
-                        + forecastEntity.getList().get(0).getWeather().get(0).getIcon()
-                        + "@2x.png")
-                .into(holder.weatherWeekIcon);
+        holder.bind(weekData.getList(position);
     }
 
     @Override
     public int getItemCount() {
-        return weekData.size();
+        return weekData.getList().size();
     }
 
     public class WeekViewHolder extends RecyclerView.ViewHolder {
@@ -91,6 +77,11 @@ public class WeatherWeekAdapter extends RecyclerView.Adapter<WeatherWeekAdapter.
             maxTempWeek = itemView.findViewById(R.id.weekTempMaxText);
             minTempWeek = itemView.findViewById(R.id.weekTempMinText);
 
+        }
+
+        public void bind(ForecastEntity forecastEntity){
+            minTempWeek.setText(forecastEntity.getList().get(0).getMain().getTempMin().toString());
+            maxTempWeek.setText(forecastEntity.getList().get(0).getMain().getTempMax().toString());
         }
 
     }

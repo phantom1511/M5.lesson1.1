@@ -68,7 +68,7 @@
             android:layout_width="30sp"
             android:layout_height="20sp"
             android:paddingLeft="@dimen/month_year_size"
-            app:srcCompat="@drawable/ic_location" />
+            android:src="@drawable/ic_location"/>
 
         <TextView
             android:id="@+id/cityName"
