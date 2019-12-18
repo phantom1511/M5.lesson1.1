@@ -126,6 +126,7 @@ public class MainActivity extends BaseActivity {
                     public void onResponse(Call<ForecastEntity> call, Response<ForecastEntity> response) {
                         weekAdapter = new WeatherWeekAdapter(MainActivity.this, weekData);
                         recyclerViewWeek.setAdapter(weekAdapter);
+                        setForecastResponse(response);
                     }
 
                     @Override
@@ -153,22 +154,23 @@ public class MainActivity extends BaseActivity {
         nameCity.setText(response.body().getName() + " " + response.body().getSys().getCountry());
         sunrise.setText(parseDateToTime(response.body().getSys().getSunrise()));
         sunset.setText(parseDateToTime(response.body().getSys().getSunset()));
-
         day.setText(new SimpleDateFormat("dd MMMM yyyy").format(new Date()));
-        dayWeekText.setText(new SimpleDateFormat("dd").format(new Date()));
-        maxTempWeek.setText(response.body().getMain().getTempMax().toString() + " °");
-        minTempWeek.setText(response.body().getMain().getTempMin().toString() + " °");
-        status.setText(response.body().getWeather().get(0).getDescription());
-        Glide.with(getApplicationContext())
-                .load("http://openweathermap.org/img/wn/"
-                        + response.body().getWeather().get(0).getIcon() + "@2x.png")
-                .into(weatherWeekIcon);
-
         Glide.with(getApplicationContext())
                 .load("http://openweathermap.org/img/wn/"
                         + response.body().getWeather().get(0).getIcon() + "@2x.png")
                 .into(imageView);
         toast("Temperature now");
+    }
+
+    public void setForecastResponse(Response<ForecastEntity> response){
+        dayWeekText.setText(new SimpleDateFormat("dd").format(new Date()));
+        maxTempWeek.setText(response.body().getList().get(0).getMain().getTempMax().toString() + " °");
+        minTempWeek.setText(response.body().getList().get(0).getMain().getTempMin().toString() + " °");
+        status.setText(response.body().getList().get(0).getWeather().get(0).getDescription());
+        Glide.with(getApplicationContext())
+                .load("http://openweathermap.org/img/wn/"
+                        + response.body().getList().get(0).getWeather().get(0).getIcon() + "@2x.png")
+                .into(weatherWeekIcon);
 
         weekData.getList().add(new CurrentWeather());
     }

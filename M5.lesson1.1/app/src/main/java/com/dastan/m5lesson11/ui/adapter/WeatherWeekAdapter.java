@@ -45,7 +45,7 @@ public class WeatherWeekAdapter extends RecyclerView.Adapter<WeatherWeekAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull WeekViewHolder holder, int position) {
-        holder.bind(weekData.getList(position);
+        holder.bind(weekData.getList().get(position));
     }
 
     @Override
@@ -80,10 +80,13 @@ public class WeatherWeekAdapter extends RecyclerView.Adapter<WeatherWeekAdapter.
         }
 
         public void bind(ForecastEntity forecastEntity){
-            minTempWeek.setText(forecastEntity.getList().get(0).getMain().getTempMin().toString());
-            maxTempWeek.setText(forecastEntity.getList().get(0).getMain().getTempMax().toString());
+
         }
 
+        public void bind(CurrentWeather currentWeather) {
+            minTempWeek.setText(currentWeather.getMain().getTempMin().toString());
+            maxTempWeek.setText(currentWeather.getMain().getTempMax().toString());
+        }
     }
 }
 
