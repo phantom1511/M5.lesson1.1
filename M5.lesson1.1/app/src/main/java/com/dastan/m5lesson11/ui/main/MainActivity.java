@@ -56,19 +56,10 @@ public class MainActivity extends BaseActivity {
     @BindView(R.id.statusView)
     TextView status;
 
-//    @BindView(R.id.weekWeatherIcon)
-//    ImageView weatherWeekIcon;
-//    @BindView(R.id.weekDayText)
-//    TextView dayWeekText;
-//    @BindView(R.id.weekTempMaxText)
-//    TextView maxTempWeek;
-//    @BindView(R.id.weekTempMinText)
-//    TextView minTempWeek;
-
     @BindView(R.id.weekRecyclerView)
     RecyclerView recyclerViewWeek;
-    ForecastEntity weekData;
-    WeatherWeekAdapter weekAdapter;
+    private ForecastEntity weekData;
+    private WeatherWeekAdapter weekAdapter;
 
 
     @Override
@@ -121,7 +112,6 @@ public class MainActivity extends BaseActivity {
                     public void onResponse(Call<ForecastEntity> call, Response<ForecastEntity> response) {
                         weekAdapter = new WeatherWeekAdapter(response.body().getList());
                         recyclerViewWeek.setAdapter(weekAdapter);
-                        setForecastResponse(response);
                     }
 
                     @Override
@@ -155,18 +145,5 @@ public class MainActivity extends BaseActivity {
                         + response.body().getWeather().get(0).getIcon() + "@2x.png")
                 .into(imageView);
         toast("Temperature now");
-    }
-
-    public void setForecastResponse(Response<ForecastEntity> response){
-//        dayWeekText.setText(new SimpleDateFormat("dd").format(new Date()));
-//        maxTempWeek.setText(response.body().getList().get(0).getMain().getTempMax().toString() + " °");
-//        minTempWeek.setText(response.body().getList().get(0).getMain().getTempMin().toString() + " °");
-//        status.setText(response.body().getList().get(0).getWeather().get(0).getDescription());
-//        Glide.with(getApplicationContext())
-//                .load("http://openweathermap.org/img/wn/"
-//                        + response.body().getList().get(0).getWeather().get(0).getIcon() + "@2x.png")
-//                .into(weatherWeekIcon);
-//
-//        weekData.getList().add(new CurrentWeather());
     }
 }

@@ -20,18 +20,11 @@ import java.util.List;
 
 public class WeatherWeekAdapter extends RecyclerView.Adapter<WeatherWeekAdapter.WeekViewHolder> {
 
-//    private Context mContext;
-//    private ForecastEntity weekData;
     private List<CurrentWeather> weekData;
 
     public WeatherWeekAdapter(List<CurrentWeather> weekData) {
         this.weekData = weekData;
     }
-    //    public WeatherWeekAdapter(Context context, ForecastEntity forecastEntityArrayList) {
-//        mContext = context;
-//        weekData = forecastEntityArrayList;
-//
-//    }
 
     @NonNull
     @Override
@@ -43,7 +36,6 @@ public class WeatherWeekAdapter extends RecyclerView.Adapter<WeatherWeekAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull WeekViewHolder holder, int position) {
-        //holder.bind(weekData.getList().get(position));
         holder.maxTempWeek.setText(weekData.get(position).getMain().getTempMax().toString() + "°");
         holder.minTempWeek.setText(weekData.get(position).getMain().getTempMin().toString() + "°");
         Glide.with(holder.weatherWeekIcon.getContext())
@@ -76,15 +68,6 @@ public class WeatherWeekAdapter extends RecyclerView.Adapter<WeatherWeekAdapter.
 
     public class WeekViewHolder extends RecyclerView.ViewHolder {
 
-//        @BindView(R.id.weekWeatherIcon)
-//        ImageView weatherWeekIcon;
-//        @BindView(R.id.weekDayText)
-//        TextView dayWeekText;
-//        @BindView(R.id.weekTempMaxText)
-//        TextView maxTempWeek;
-//        @BindView(R.id.weekTempMinText)
-//        TextView minTempWeek;
-
         private ImageView weatherWeekIcon;
         private TextView dayWeekText;
         private TextView maxTempWeek;
@@ -99,15 +82,6 @@ public class WeatherWeekAdapter extends RecyclerView.Adapter<WeatherWeekAdapter.
             minTempWeek = itemView.findViewById(R.id.weekTempMinText);
 
         }
-
-//        public void bind(ForecastEntity forecastEntity){
-//
-//        }
-//
-//        public void bind(CurrentWeather currentWeather) {
-//            minTempWeek.setText(currentWeather.getMain().getTempMin().toString());
-//            maxTempWeek.setText(currentWeather.getMain().getTempMax().toString());
-//        }
     }
 }
 
