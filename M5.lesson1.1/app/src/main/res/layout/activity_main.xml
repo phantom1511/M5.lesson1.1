@@ -201,7 +201,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:paddingLeft="@dimen/month_year_size"
-        android:paddingTop="@dimen/month_year_size">
+        android:paddingTop="15sp">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -216,8 +216,7 @@
             android:text="SW 4m/s"
             android:textSize="@dimen/month_year_size"
             android:textStyle="bold"
-            android:textColor="@color/colorBlack"
-            android:paddingTop="@dimen/month_year_size"/>
+            android:textColor="@color/colorBlack"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -233,8 +232,7 @@
             android:text="81%"
             android:textSize="@dimen/month_year_size"
             android:textStyle="bold"
-            android:textColor="@color/colorBlack"
-            android:paddingTop="@dimen/month_year_size"/>
+            android:textColor="@color/colorBlack"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -250,31 +248,14 @@
             android:text="06:00"
             android:textSize="@dimen/month_year_size"
             android:textStyle="bold"
-            android:textColor="@color/colorBlack"
-            android:paddingTop="@dimen/month_year_size"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Air Quality Index"
-            android:textStyle="bold"
-            android:textColor="@color/colorBlack"
-            android:paddingTop="@dimen/month_year_size"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="30"
-            android:textSize="@dimen/month_year_size"
-            android:textStyle="bold"
-            android:textColor="@color/colorBlack"
-            android:paddingTop="@dimen/month_year_size"/>
+            android:textColor="@color/colorBlack"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:paddingLeft="@dimen/padding_64"
-        android:paddingTop="@dimen/month_year_size">
+        android:paddingTop="15sp">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -289,8 +270,7 @@
             android:text="1010mb"
             android:textSize="@dimen/month_year_size"
             android:textStyle="bold"
-            android:textColor="@color/colorBlack"
-            android:paddingTop="@dimen/month_year_size"/>
+            android:textColor="@color/colorBlack"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -306,8 +286,7 @@
             android:text="100%"
             android:textSize="@dimen/month_year_size"
             android:textStyle="bold"
-            android:textColor="@color/colorBlack"
-            android:paddingTop="@dimen/month_year_size"/>
+            android:textColor="@color/colorBlack"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -323,24 +302,7 @@
             android:text="20:31"
             android:textSize="@dimen/month_year_size"
             android:textStyle="bold"
-            android:textColor="@color/colorBlack"
-            android:paddingTop="@dimen/month_year_size"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Air Quality"
-            android:textStyle="bold"
-            android:textColor="@color/colorBlack"
-            android:paddingTop="@dimen/month_year_size"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Good"
-            android:textSize="@dimen/month_year_size"
-            android:textStyle="bold"
-            android:textColor="@color/colorBlack"
-            android:paddingTop="@dimen/month_year_size"/>
+            android:textColor="@color/colorBlack"/>
     </LinearLayout>
     </LinearLayout>
 

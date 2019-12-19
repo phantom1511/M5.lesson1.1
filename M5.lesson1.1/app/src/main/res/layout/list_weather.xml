@@ -14,8 +14,8 @@
 
     <ImageView
         android:id="@+id/weekWeatherIcon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/forecast_size_30sp"
+        android:layout_height="@dimen/forecast_size_30sp"
         app:srcCompat="@drawable/snow"/>
 
     <TextView
@@ -23,9 +23,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="17"
-        android:textSize="@dimen/weekText"
+        android:textSize="15sp"
         android:textColor="@color/colorBlack"
-        android:paddingBottom="@dimen/padding_16"
+        android:paddingBottom="@dimen/padding_8"
         android:layout_gravity="center"/>
 
     <TextView
@@ -33,7 +33,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="30°"
-        android:textSize="@dimen/weekText"
+        android:textSize="15sp"
         android:textColor="@color/colorGray"
         android:layout_gravity="center"/>
 
@@ -42,7 +42,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="30°"
-        android:textSize="@dimen/weekText"
+        android:textSize="15sp"
         android:textColor="@color/colorGray"
         android:layout_gravity="center"/>
 

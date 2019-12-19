@@ -15,12 +15,8 @@ import com.dastan.m5lesson11.base.BaseActivity;
 import com.dastan.m5lesson11.data.RetrofitBuilder;
 import com.dastan.m5lesson11.data.entity.CurrentWeather;
 import com.dastan.m5lesson11.data.entity.ForecastEntity;
-import com.dastan.m5lesson11.data.entity.Main;
-import com.dastan.m5lesson11.ui.adapter.WeatherWeekAdapter;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.Locale;
 
@@ -60,14 +56,14 @@ public class MainActivity extends BaseActivity {
     @BindView(R.id.statusView)
     TextView status;
 
-    @BindView(R.id.weekWeatherIcon)
-    ImageView weatherWeekIcon;
-    @BindView(R.id.weekDayText)
-    TextView dayWeekText;
-    @BindView(R.id.weekTempMaxText)
-    TextView maxTempWeek;
-    @BindView(R.id.weekTempMinText)
-    TextView minTempWeek;
+//    @BindView(R.id.weekWeatherIcon)
+//    ImageView weatherWeekIcon;
+//    @BindView(R.id.weekDayText)
+//    TextView dayWeekText;
+//    @BindView(R.id.weekTempMaxText)
+//    TextView maxTempWeek;
+//    @BindView(R.id.weekTempMinText)
+//    TextView minTempWeek;
 
     @BindView(R.id.weekRecyclerView)
     RecyclerView recyclerViewWeek;
@@ -83,7 +79,6 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
 
         fetchWeather();
         fetchForecastWeather();
@@ -92,9 +87,9 @@ public class MainActivity extends BaseActivity {
 
     private void initViews(){
         recyclerViewWeek.setHasFixedSize(true);
-        recyclerViewWeek.setLayoutManager(new LinearLayoutManager(this));
+        recyclerViewWeek.setLayoutManager(new LinearLayoutManager(this,RecyclerView.HORIZONTAL,false));
 
-        weekData = new ForecastEntity(weatherWeekIcon, dayWeekText, maxTempWeek, minTempWeek);
+//        weekData = new ForecastEntity(weatherWeekIcon, dayWeekText, maxTempWeek, minTempWeek);
     }
 
     public static void start(Context context) {
@@ -124,7 +119,7 @@ public class MainActivity extends BaseActivity {
                 .enqueue(new Callback<ForecastEntity>() {
                     @Override
                     public void onResponse(Call<ForecastEntity> call, Response<ForecastEntity> response) {
-                        weekAdapter = new WeatherWeekAdapter(MainActivity.this, weekData);
+                        weekAdapter = new WeatherWeekAdapter(response.body().getList());
                         recyclerViewWeek.setAdapter(weekAdapter);
                         setForecastResponse(response);
                     }
@@ -163,15 +158,15 @@ public class MainActivity extends BaseActivity {
     }
 
     public void setForecastResponse(Response<ForecastEntity> response){
-        dayWeekText.setText(new SimpleDateFormat("dd").format(new Date()));
-        maxTempWeek.setText(response.body().getList().get(0).getMain().getTempMax().toString() + " °");
-        minTempWeek.setText(response.body().getList().get(0).getMain().getTempMin().toString() + " °");
-        status.setText(response.body().getList().get(0).getWeather().get(0).getDescription());
-        Glide.with(getApplicationContext())
-                .load("http://openweathermap.org/img/wn/"
-                        + response.body().getList().get(0).getWeather().get(0).getIcon() + "@2x.png")
-                .into(weatherWeekIcon);
-
-        weekData.getList().add(new CurrentWeather());
+//        dayWeekText.setText(new SimpleDateFormat("dd").format(new Date()));
+//        maxTempWeek.setText(response.body().getList().get(0).getMain().getTempMax().toString() + " °");
+//        minTempWeek.setText(response.body().getList().get(0).getMain().getTempMin().toString() + " °");
+//        status.setText(response.body().getList().get(0).getWeather().get(0).getDescription());
+//        Glide.with(getApplicationContext())
+//                .load("http://openweathermap.org/img/wn/"
+//                        + response.body().getList().get(0).getWeather().get(0).getIcon() + "@2x.png")
+//                .into(weatherWeekIcon);
+//
+//        weekData.getList().add(new CurrentWeather());
     }
 }
