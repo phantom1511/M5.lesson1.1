@@ -8,4 +8,5 @@
     <string name="year">2019</string>
     <string name="city_name">Bishkek, KGZ</string>
     <string name="nameApp">Ronaldo Weather App</string>
+    <string name="mapBtn">Map</string>
 </resources>

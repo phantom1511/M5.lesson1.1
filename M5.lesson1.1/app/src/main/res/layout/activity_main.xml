@@ -10,7 +10,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorGray"
+        android:background="@color/colorTabLayout"
         android:orientation="horizontal"
         android:paddingLeft="@dimen/padding_16"
         android:paddingTop="@dimen/padding_32"
@@ -68,7 +68,8 @@
             android:layout_width="30sp"
             android:layout_height="20sp"
             android:paddingLeft="@dimen/month_year_size"
-            android:src="@drawable/ic_location"/>
+            android:src="@drawable/ic_location"
+            android:onClick="setMapClick"/>
 
         <TextView
             android:id="@+id/cityName"
@@ -79,14 +80,12 @@
             android:textSize="@dimen/month_year_size"
             android:textStyle="bold" />
     </LinearLayout>
-
-    <ImageView
-        android:id="@+id/weatherImg"
-        android:layout_width="@dimen/size_100"
-        android:layout_height="@dimen/size_100"
-        android:paddingLeft="@dimen/month_year_size"
-        app:srcCompat="@drawable/snow" />
-
+        <ImageView
+            android:id="@+id/weatherImg"
+            android:layout_width="@dimen/size_100"
+            android:layout_height="@dimen/size_100"
+            android:paddingLeft="@dimen/month_year_size"
+            app:srcCompat="@drawable/snow"/>
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

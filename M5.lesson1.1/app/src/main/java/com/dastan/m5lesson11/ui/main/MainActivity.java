@@ -3,6 +3,8 @@ package com.dastan.m5lesson11.ui.main;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -145,5 +147,10 @@ public class MainActivity extends BaseActivity {
                         + response.body().getWeather().get(0).getIcon() + "@2x.png")
                 .into(imageView);
         toast("Temperature now");
+    }
+
+    public void setMapClick(View view) {
+        Intent intent = new Intent(this, MapActivity.class);
+        startActivityForResult(intent, 101);
     }
 }

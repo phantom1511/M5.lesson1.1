@@ -19,4 +19,6 @@ public interface WeatherService {
 
     @GET(FORECAST)
     Call<ForecastEntity> forecastWeather(@Query("q") String city, @Query("appid") String key, @Query("units") String c);
+
+
 }
