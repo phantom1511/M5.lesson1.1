@@ -9,7 +9,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.dastan.m5lesson11.R;
@@ -31,6 +30,7 @@ public class MapActivity extends BaseMapActivity {
     @Override
     public void onMapReady(@NonNull MapboxMap mapboxMap) {
         super.onMapReady(mapboxMap);
+
         mapboxMap.addOnMapLongClickListener(point -> {
             toast("coordinates");
             AlertDialog.Builder builder = new AlertDialog.Builder(MapActivity.this);
@@ -40,9 +40,7 @@ public class MapActivity extends BaseMapActivity {
                         intent.putExtra("lat", point.getLatitude());
                         intent.putExtra("lng", point.getLongitude());
                         setResult(RESULT_OK, intent);
-//                            ProgressBar progressBar = findViewById(R.id.progressBar);
-//                            progressBar.setVisibility(View.VISIBLE);
-                            finish();
+                        finish();
                 }).setNegativeButton("No", (dialog, which) -> dialog.cancel());
                 AlertDialog alertDialog = builder.create();
                 alertDialog.show();
