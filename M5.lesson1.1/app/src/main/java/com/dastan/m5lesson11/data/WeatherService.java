@@ -20,5 +20,11 @@ public interface WeatherService {
     @GET(FORECAST)
     Call<ForecastEntity> forecastWeather(@Query("q") String city, @Query("appid") String key, @Query("units") String c);
 
+    @GET(CURRENT_WEATHER)
+    Call<CurrentWeather> coordinatesCurrentWeather(@Query("lat") double lat, @Query("lon") double lon, @Query("units") String c, @Query("appid") String key);
+
+    @GET(FORECAST)
+    Call<ForecastEntity> coordinatesForecastWeather(@Query("lat") double lat, @Query("lon") double lon, @Query("units") String c, @Query("appid") String key);
+
 
 }

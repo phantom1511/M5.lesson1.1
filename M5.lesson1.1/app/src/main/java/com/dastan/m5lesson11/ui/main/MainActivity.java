@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -62,6 +63,8 @@ public class MainActivity extends BaseActivity {
     RecyclerView recyclerViewWeek;
     private ForecastEntity weekData;
     private WeatherWeekAdapter weekAdapter;
+    private double lat;
+    private double lon;
 
 
     @Override
@@ -152,5 +155,47 @@ public class MainActivity extends BaseActivity {
     public void setMapClick(View view) {
         Intent intent = new Intent(this, MapActivity.class);
         startActivityForResult(intent, 101);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK && requestCode == 101 && data != null){
+            lat = data.getDoubleExtra("lat", 1);
+            lon = data.getDoubleExtra("lng", 1);
+            getCurrentWeatherCoordinates(lat, lon);
+            getForecastWeatherCoordinates(lat, lon);
+        }
+    }
+
+    private void getCurrentWeatherCoordinates(double lat, double lon) {
+        RetrofitBuilder.getWeatherService().coordinatesCurrentWeather(lat, lon, "metric" , API_KEY )
+                .enqueue(new Callback<CurrentWeather>() {
+                    @Override
+                    public void onResponse(Call<CurrentWeather> call, Response<CurrentWeather> response) {
+                        setResponse(response);
+                    }
+
+                    @Override
+                    public void onFailure(Call<CurrentWeather> call, Throwable t) {
+                        toast(t.getLocalizedMessage());
+                    }
+                });
+    }
+
+    private void getForecastWeatherCoordinates(double lat, double lon) {
+        RetrofitBuilder.getWeatherService().coordinatesForecastWeather(lat, lon, "metric", API_KEY )
+                .enqueue(new Callback<ForecastEntity>() {
+                    @Override
+                    public void onResponse(Call<ForecastEntity> call, Response<ForecastEntity> response) {
+                        weekAdapter = new WeatherWeekAdapter(response.body().getList());
+                        recyclerViewWeek.setAdapter(weekAdapter);
+                    }
+
+                    @Override
+                    public void onFailure(Call<ForecastEntity> call, Throwable t) {
+                        toast(t.getLocalizedMessage());
+                    }
+                });
     }
 }
