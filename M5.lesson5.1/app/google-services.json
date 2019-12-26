@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "922524864936",
+    "firebase_url": "https://m5lesson51.firebaseio.com",
+    "project_id": "m5lesson51",
+    "storage_bucket": "m5lesson51.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:922524864936:android:2335cff6024b509e7c8d9d",
+        "android_client_info": {
+          "package_name": "com.dastan.m5lesson51"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "922524864936-k6lil6ulc9e1turscpjrihn6hvtchd40.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.dastan.m5lesson51",
+            "certificate_hash": "e77489e7fa91159daaef733b14e9c5d2e9c4a5ae"
+          }
+        },
+        {
+          "client_id": "922524864936-hmtrsljr4g4hso0bto0e124q0j23c4a2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAp1ViPJep_lYRf4AaAm0zzdrE4alOOgxE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "922524864936-hmtrsljr4g4hso0bto0e124q0j23c4a2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
