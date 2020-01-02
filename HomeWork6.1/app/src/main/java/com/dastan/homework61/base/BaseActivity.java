@@ -1,20 +1,21 @@
-package com.dastan.m5lesson11.base;
+package com.dastan.homework61.base;
 
 import android.os.Bundle;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-
 import butterknife.ButterKnife;
 
 public abstract class BaseActivity extends AppCompatActivity {
+
     protected abstract int getLayoutId();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutId());
+
         ButterKnife.bind(this);
     }
 

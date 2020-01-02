@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">HomeWork6.1</string>
+    <string name="currencyForSpinner">Currency!</string>
+    <string name="hintToInput">input your number</string>
+    <string name="resultWord">Result:</string>
+
+    <string-array name="animals">
+        <item>Cats1</item>
+        <item>Cats2</item>
+        <item>Cats3</item>
+        <item>Cats4</item>
+        <item>Cats5</item>
+        <item>Cats6</item>
+    </string-array>
+</resources>
+
