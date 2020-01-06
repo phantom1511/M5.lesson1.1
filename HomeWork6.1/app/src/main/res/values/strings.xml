@@ -1,8 +1,11 @@
 <resources>
     <string name="app_name">HomeWork6.1</string>
     <string name="currencyForSpinner">Currency!</string>
-    <string name="hintToInput">$$$</string>
+    <string name="hintToInput">input</string>
     <string name="resultWord">Result</string>
+    <string name="from">From</string>
+    <string name="title">Exchange Money</string>
+    <string name="to">To</string>
 
     <string-array name="animals">
         <item>Cats1</item>

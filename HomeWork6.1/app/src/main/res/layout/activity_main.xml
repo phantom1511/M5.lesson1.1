@@ -11,27 +11,67 @@
         android:id="@+id/titleText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Exchange Money"
+        android:text="@string/title"
         android:textSize="@dimen/resultViewSize"
+        android:textColor="@color/colorBlack"
+        android:paddingBottom="@dimen/size_30sp"
+        android:layout_marginTop="@dimen/size_30sp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"/>
+
+    <TextView
+        android:id="@+id/fromText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/from"
+        android:textColor="@color/colorBlack"
+        android:textSize="@dimen/size_16sp"
+        android:paddingBottom="@dimen/size_30sp"
+        android:layout_marginStart="@dimen/size_30sp"
+        app:layout_constraintTop_toBottomOf="@+id/titleText"
+        app:layout_constraintBottom_toTopOf="@id/fromSpinner"
+        app:layout_constraintLeft_toLeftOf="parent"/>
+
+    <ImageView
+        android:id="@+id/imgArrow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_arrow_forward"
+        app:layout_constraintTop_toBottomOf="@id/titleText"
+        app:layout_constraintLeft_toRightOf="@+id/fromText"
+        app:layout_constraintRight_toLeftOf="@+id/toText"
+        app:layout_constraintBottom_toTopOf="@id/inputText"/>
 
     <Spinner
         android:id="@+id/fromSpinner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/currencyForSpinner"
+        android:layout_marginStart="@dimen/size_20sp"
         app:layout_constraintBottom_toTopOf="@+id/resultText"
         app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fromText"/>
+
+    <TextView
+        android:id="@+id/toText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/to"
+        android:textColor="@color/colorBlack"
+        android:textSize="@dimen/size_16sp"
+        android:paddingBottom="@dimen/size_30sp"
+        android:layout_marginEnd="@dimen/size_30sp"
         app:layout_constraintTop_toBottomOf="@+id/titleText"
-        app:layout_constraintRight_toLeftOf="@id/inputText"/>
+        app:layout_constraintBottom_toTopOf="@id/toSpinner"
+        app:layout_constraintRight_toRightOf="parent"/>
 
     <EditText
         android:id="@+id/inputText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint="@string/hintToInput"
+        android:textColor="@color/colorBlack"
         android:inputType="number"
         app:layout_constraintTop_toBottomOf="@+id/titleText"
         app:layout_constraintBottom_toTopOf="@+id/resultText"
@@ -43,16 +83,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/currencyForSpinner"
+        android:layout_marginRight="@dimen/size_20sp"
         app:layout_constraintBottom_toTopOf="@+id/resultText"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/titleText"
-        app:layout_constraintLeft_toRightOf="@id/inputText"/>
+        app:layout_constraintTop_toBottomOf="@+id/toText"/>
 
     <TextView
         android:id="@+id/resultView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="@dimen/resultViewSize"
+        android:textColor="@color/colorBlack"
         app:layout_constraintTop_toBottomOf="@id/resultText"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -64,6 +105,8 @@
         android:layout_height="wrap_content"
         android:text="@string/resultWord"
         android:textSize="@dimen/resultViewSize"
+        android:paddingTop="@dimen/size_30sp"
+        android:textColor="@color/colorBlack"
         app:layout_constraintTop_toBottomOf="@id/inputText"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
