@@ -22,9 +22,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/currencyForSpinner"
-        app:layout_constraintBottom_toTopOf="@+id/resultView"
+        app:layout_constraintBottom_toTopOf="@+id/resultText"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/titleText"/>
+        app:layout_constraintTop_toBottomOf="@+id/titleText"
+        app:layout_constraintRight_toLeftOf="@id/inputText"/>
 
     <EditText
         android:id="@+id/inputText"
@@ -33,7 +34,7 @@
         android:hint="@string/hintToInput"
         android:inputType="number"
         app:layout_constraintTop_toBottomOf="@+id/titleText"
-        app:layout_constraintBottom_toTopOf="@+id/resultView"
+        app:layout_constraintBottom_toTopOf="@+id/resultText"
         app:layout_constraintRight_toLeftOf="@+id/toSpinner"
         app:layout_constraintLeft_toRightOf="@+id/fromSpinner"/>
 
@@ -42,16 +43,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/currencyForSpinner"
-        app:layout_constraintBottom_toTopOf="@+id/resultView"
+        app:layout_constraintBottom_toTopOf="@+id/resultText"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/titleText" />
+        app:layout_constraintTop_toBottomOf="@+id/titleText"
+        app:layout_constraintLeft_toRightOf="@id/inputText"/>
 
     <TextView
         android:id="@+id/resultView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="@dimen/resultViewSize"
-        app:layout_constraintTop_toBottomOf="@id/inputText"
+        app:layout_constraintTop_toBottomOf="@id/resultText"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginTop="@dimen/resultViewSize"/>
@@ -64,6 +66,18 @@
         android:textSize="@dimen/resultViewSize"
         app:layout_constraintTop_toBottomOf="@id/inputText"
         app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         android:layout_marginTop="@dimen/resultViewSize"/>
+
+    <ImageView
+        android:id="@+id/imgIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_arrow"
+        app:layout_constraintTop_toBottomOf="@id/resultText"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/resultView"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

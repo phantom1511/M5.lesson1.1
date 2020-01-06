@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">HomeWork6.1</string>
     <string name="currencyForSpinner">Currency!</string>
-    <string name="hintToInput">input your number</string>
-    <string name="resultWord">Result:</string>
+    <string name="hintToInput">$$$</string>
+    <string name="resultWord">Result</string>
 
     <string-array name="animals">
         <item>Cats1</item>
