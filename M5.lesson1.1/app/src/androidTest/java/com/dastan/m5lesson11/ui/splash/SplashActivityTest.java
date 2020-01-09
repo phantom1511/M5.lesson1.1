@@ -38,67 +38,60 @@ public class SplashActivityTest {
 
     @Test
     public void splashActivityTest() {
-        ViewInteraction imageView = onView(
+        onView(
                 allOf(withId(R.id.onBoardImageView),
                         childAtPosition(
                                 withParent(withId(R.id.viewPager)),
                                 0),
-                        isDisplayed()));
-        imageView.check(matches(isDisplayed()));
+                        isDisplayed())).check(matches(isDisplayed()));
 
-        ViewInteraction textView = onView(
+        onView(
                 allOf(withId(R.id.textView), withText("Cristiano Ronaldo"),
                         childAtPosition(
                                 withParent(withId(R.id.viewPager)),
                                 1),
-                        isDisplayed()));
-        textView.check(matches(withText("Cristiano Ronaldo")));
+                        isDisplayed())).check(matches(withText("Cristiano Ronaldo")));
 
-        ViewInteraction button = onView(
+        onView(
                 allOf(withId(R.id.btnNext),
                         childAtPosition(
                                 childAtPosition(
                                         withId(android.R.id.content),
                                         0),
                                 2),
-                        isDisplayed()));
-        button.check(matches(isDisplayed()));
+                        isDisplayed())).check(matches(isDisplayed()));
 
-        ViewInteraction appCompatButton = onView(
+        onView(
                 allOf(withId(R.id.btnNext), withText("next"),
                         childAtPosition(
                                 childAtPosition(
                                         withId(android.R.id.content),
                                         0),
                                 3),
-                        isDisplayed()));
-        appCompatButton.perform(click());
+                        isDisplayed())).perform(click());
 
-        ViewInteraction imageView2 = onView(
+        onView(
                 allOf(withId(R.id.onBoardImageView),
                         childAtPosition(
                                 withParent(withId(R.id.viewPager)),
                                 0),
-                        isDisplayed()));
-        imageView2.check(matches(isDisplayed()));
+                        isDisplayed())).check(matches(isDisplayed()));
 
-        ViewInteraction textView2 = onView(
+        onView(
                 allOf(withId(R.id.textView), withText("Dos Santos"),
                         childAtPosition(
                                 withParent(withId(R.id.viewPager)),
                                 1),
-                        isDisplayed()));
-        textView2.check(matches(withText("Dos Santos")));
+                        isDisplayed())).check(matches(withText("Dos Santos")));
 
-        ViewInteraction button2 = onView(
+        onView(
                 allOf(withId(R.id.btnNext),
                         childAtPosition(
                                 childAtPosition(
                                         withId(android.R.id.content),
                                         0),
                                 2),
-                        isDisplayed()));
-        button2.check(matches(isDisplayed()));
+                        isDisplayed())).check(matches(isDisplayed()));
     }
 
     private static Matcher<View> childAtPosition(
