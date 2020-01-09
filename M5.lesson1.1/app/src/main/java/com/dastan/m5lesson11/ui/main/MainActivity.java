@@ -1,14 +1,18 @@
 package com.dastan.m5lesson11.ui.main;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.location.Location;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
+import androidx.core.content.PermissionChecker;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -18,8 +22,15 @@ import com.dastan.m5lesson11.base.BaseActivity;
 import com.dastan.m5lesson11.data.RetrofitBuilder;
 import com.dastan.m5lesson11.data.entity.CurrentWeather;
 import com.dastan.m5lesson11.data.entity.ForecastEntity;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationResult;
+import com.nabinbhandari.android.permissions.PermissionHandler;
+import com.nabinbhandari.android.permissions.Permissions;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
@@ -61,10 +72,15 @@ public class MainActivity extends BaseActivity {
 
     @BindView(R.id.weekRecyclerView)
     RecyclerView recyclerViewWeek;
+
     private ForecastEntity weekData;
     private WeatherWeekAdapter weekAdapter;
     private double lat;
     private double lon;
+
+    private FusedLocationProviderClient fusedLocationProviderClient;
+    private LocationRequest locationRequest;
+    private ArrayList<Location> coordinates = new ArrayList<>();
 
 
     @Override
@@ -76,9 +92,11 @@ public class MainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        fetchWeather();
-        fetchForecastWeather();
+//        fetchWeather();
+//        fetchForecastWeather();
         initViews();
+        getCurrentLocation();
+        callPermission();
     }
 
     private void initViews(){
@@ -92,39 +110,39 @@ public class MainActivity extends BaseActivity {
         context.startActivity(new Intent(context, MainActivity.class));
     }
 
-    private void fetchWeather() {
-        RetrofitBuilder.getWeatherService().currentWeather("Bishkek",
-                API_KEY,
-                "metric").enqueue(new Callback<CurrentWeather>() {
-            @Override
-            public void onResponse(Call<CurrentWeather> call, Response<CurrentWeather> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                    setResponse(response);
-                }
-            }
-
-            @Override
-            public void onFailure(Call<CurrentWeather> call, Throwable t) {
-                toast(t.getLocalizedMessage());
-            }
-        });
-    }
-
-    private void fetchForecastWeather() {
-        RetrofitBuilder.getWeatherService().forecastWeather("Bishkek", API_KEY, "metric")
-                .enqueue(new Callback<ForecastEntity>() {
-                    @Override
-                    public void onResponse(Call<ForecastEntity> call, Response<ForecastEntity> response) {
-                        weekAdapter = new WeatherWeekAdapter(response.body().getList());
-                        recyclerViewWeek.setAdapter(weekAdapter);
-                    }
-
-                    @Override
-                    public void onFailure(Call<ForecastEntity> call, Throwable t) {
-                        toast(t.getLocalizedMessage());
-                    }
-                });
-    }
+//    private void fetchWeather() {
+//        RetrofitBuilder.getWeatherService().currentWeather("Bishkek",
+//                API_KEY,
+//                "metric").enqueue(new Callback<CurrentWeather>() {
+//            @Override
+//            public void onResponse(Call<CurrentWeather> call, Response<CurrentWeather> response) {
+//                if (response.isSuccessful() && response.body() != null) {
+//                    setResponse(response);
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<CurrentWeather> call, Throwable t) {
+//                toast(t.getLocalizedMessage());
+//            }
+//        });
+//    }
+//
+//    private void fetchForecastWeather() {
+//        RetrofitBuilder.getWeatherService().forecastWeather("Bishkek", API_KEY, "metric")
+//                .enqueue(new Callback<ForecastEntity>() {
+//                    @Override
+//                    public void onResponse(Call<ForecastEntity> call, Response<ForecastEntity> response) {
+//                        weekAdapter = new WeatherWeekAdapter(response.body().getList());
+//                        recyclerViewWeek.setAdapter(weekAdapter);
+//                    }
+//
+//                    @Override
+//                    public void onFailure(Call<ForecastEntity> call, Throwable t) {
+//                        toast(t.getLocalizedMessage());
+//                    }
+//                });
+//    }
 
     private String parseDateToTime(double d) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm", Locale.getDefault());
@@ -195,6 +213,52 @@ public class MainActivity extends BaseActivity {
                     @Override
                     public void onFailure(Call<ForecastEntity> call, Throwable t) {
                         toast(t.getLocalizedMessage());
+                    }
+                });
+    }
+
+    private void getCurrentLocation() {
+
+        if (ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_COARSE_LOCATION) ==
+                PermissionChecker.PERMISSION_GRANTED &&
+                ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) ==
+                        PermissionChecker.PERMISSION_GRANTED) {
+            fusedLocationProviderClient = new FusedLocationProviderClient(this);
+            locationRequest = new LocationRequest();
+            locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+//            locationRequest.setFastestInterval(2000);
+//            locationRequest.setInterval(4000);
+            fusedLocationProviderClient.requestLocationUpdates(locationRequest, new LocationCallback() {
+                @Override
+                public void onLocationResult(LocationResult locationResult) {
+
+                    super.onLocationResult(locationResult);
+                    Log.e("------", "lat: " + locationResult.getLastLocation().getLatitude() +
+                            " lon: " + locationResult.getLastLocation().getLongitude() + "  ");
+                    double lat = locationResult.getLastLocation().getLatitude();
+                    double lon = locationResult.getLastLocation().getLongitude();
+                    getCurrentWeatherCoordinates(lat,lon);
+                    getForecastWeatherCoordinates(lat,lon);
+                }
+            }, getMainLooper());
+
+        }
+    }
+
+    private void callPermission() {
+        Permissions.check(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION},
+                "Location permission needed to run this app", new Permissions.Options()
+                        .setSettingsDialogTitle("Warning!").setRationaleDialogTitle("Info"),
+                new PermissionHandler() {
+                    @Override
+                    public void onGranted() {
+                        getCurrentLocation();
+                    }
+
+                    @Override
+                    public void onDenied(Context context, ArrayList<String> deniedPermissions) {
+                        super.onDenied(context, deniedPermissions);
+                        callPermission();
                     }
                 });
     }

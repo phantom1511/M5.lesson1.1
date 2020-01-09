@@ -24,7 +24,7 @@ public class ForegroundService extends Service {
 
     private FusedLocationProviderClient fusedLocationProviderClient;
     private LocationRequest locationRequest;
-    private ArrayList<Location> coordinates = new ArrayList<>();;
+    private ArrayList<Location> coordinates = new ArrayList<>();
 
     @Nullable
     @Override
